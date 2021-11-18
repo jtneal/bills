@@ -1,16 +1,42 @@
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { BrowserModule } from '@angular/platform-browser';
-
-import { AppComponent } from './app.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 
+import { AppComponent } from './app.component';
+
 @NgModule({
+  bootstrap: [AppComponent],
   declarations: [AppComponent],
   imports: [
     BrowserModule,
-    RouterModule.forRoot([], { initialNavigation: 'enabledBlocking' }),
+    BrowserAnimationsModule,
+    HttpClientModule,
+    MatButtonModule,
+    MatToolbarModule,
+    RouterModule.forRoot(
+      [
+        {
+          loadChildren: () => import('./home/home.module').then((m) => m.HomeModule),
+          path: '',
+        },
+        {
+          loadChildren: () => import('./accounts/accounts.module').then((m) => m.AccountsModule),
+          path: 'accounts',
+        },
+        {
+          loadChildren: () => import('./schedule/schedule.module').then((m) => m.ScheduleModule),
+          path: 'schedule',
+        },
+      ],
+      {
+        initialNavigation: 'enabledBlocking',
+      },
+    ),
   ],
   providers: [],
-  bootstrap: [AppComponent],
 })
 export class AppModule {}

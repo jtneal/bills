@@ -1,0 +1,45 @@
+<h1>Schedule</h1>
+
+<section *ngIf="schedule$ | async as schedule">
+  <mat-accordion>
+    <mat-expansion-panel hideToggle>
+      <mat-expansion-panel-header>
+        <mat-panel-title> Export for Excel </mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Schedule</mat-label>
+        <textarea matInput>{{ getScheduleForExcel(schedule) }}</textarea>
+      </mat-form-field>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+  <table mat-table class="mat-elevation-z8" [dataSource]="schedule">
+    <ng-container matColumnDef="account">
+      <th mat-header-cell *matHeaderCellDef>Account</th>
+      <td mat-cell *matCellDef="let element">{{ element.account }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="amount">
+      <th mat-header-cell *matHeaderCellDef>Amount</th>
+      <td mat-cell *matCellDef="let element">{{ element.amount | currency }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="dueDate">
+      <th mat-header-cell *matHeaderCellDef>Due Date</th>
+      <td mat-cell *matCellDef="let element">{{ element.dueDate }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="paidDate">
+      <th mat-header-cell *matHeaderCellDef>Paid Date</th>
+      <td mat-cell *matCellDef="let element">{{ element.paidDate }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="method">
+      <th mat-header-cell *matHeaderCellDef>Method</th>
+      <td mat-cell *matCellDef="let element">{{ element.method }}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+</section>

@@ -29,7 +29,8 @@
     "serve": {
       "executor": "@nrwl/node:execute",
       "options": {
-        "buildTarget": "bff:build"
+        "buildTarget": "bff:build",
+        "host": "0.0.0.0"
       }
     },
     "lint": {
