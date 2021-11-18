@@ -1,0 +1,23 @@
+{
+  "root": "apps/bff-e2e",
+  "sourceRoot": "apps/bff-e2e/src",
+  "projectType": "application",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/bff-e2e/**/*.ts"]
+      }
+    },
+    "e2e": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/bff-e2e"],
+      "options": {
+        "jestConfig": "apps/bff-e2e/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}
